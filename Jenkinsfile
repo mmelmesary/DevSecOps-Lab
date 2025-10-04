@@ -30,9 +30,9 @@ pipeline {
                           -Dsonar.projectName="DevSecOps" \
                           -Dsonar.projectVersion=1.0 \
                           -Dsonar.sources=. \
-                          -Dsonar.exclusions=**/node_modules/**,**/venv/** \
-                          -Dsonar.host.url=$SONAR_HOST_URL \
-                          -Dsonar.login=$SONAR_AUTH_TOKEN
+                          -Dsonar.exclusions="**/node_modules/**,**/venv/**" \
+                          -Dsonar.host.url="$SONAR_HOST_URL" \
+                          -Dsonar.login="$SONAR_AUTH_TOKEN"
                     '''
                 }
             }
