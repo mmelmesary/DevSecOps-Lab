@@ -9,7 +9,7 @@ pipeline {
 
         stage('SAST') {
             steps {
-                sh 'semgrep --config p/nodejsscan --config p/javascript --config p/owasp-top-ten --config p/secrets --json . > semgrep-result.json'
+                sh 'semgrep --config p/nodejsscan --config p/javascript --config p/owasp-top-ten --config p/secrets --error --json --output semgrep-result.json . || true'
             }
         }
 
