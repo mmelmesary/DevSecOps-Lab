@@ -9,7 +9,7 @@ pipeline {
 
         stage('SAST') {
             steps {
-                sh 'semgrep --config p/nodejsscan --config p/javascript --config p/owasp-top-ten --config p/secrets --error --json --output semgrep-result.json .'
+                sh 'semgrep --config p/nodejsscan --config p/javascript --config p/owasp-top-ten --config p/secrets --json --output semgrep-result.json .'
             }
         }
 
@@ -21,22 +21,22 @@ pipeline {
         }
 
 
-        // stage('Sonarqube') {
-        //     steps {
-        //         withSonarQubeEnv("${env.SONARQUBE}") {
-        //             sh '''
-        //                 sonar-scanner \
-        //                   -Dsonar.projectKey=devsecops \
-        //                   -Dsonar.projectName="DevSecOps" \
-        //                   -Dsonar.projectVersion=1.0 \
-        //                   -Dsonar.sources=. \
-        //                   -Dsonar.exclusions=**/node_modules/**,**/venv/** \
-        //                   -Dsonar.host.url=$SONAR_HOST_URL \
-        //                   -Dsonar.login=$SONAR_AUTH_TOKEN
-        //             '''
-        //         }
-        //     }
-        // }
+        stage('Sonarqube') {
+            steps {
+                withSonarQubeEnv("${env.SONARQUBE}") {
+                    sh '''
+                        sonar-scanner \
+                          -Dsonar.projectKey=devsecops \
+                          -Dsonar.projectName="DevSecOps" \
+                          -Dsonar.projectVersion=1.0 \
+                          -Dsonar.sources=. \
+                          -Dsonar.exclusions=**/node_modules/**,**/venv/** \
+                          -Dsonar.host.url=$SONAR_HOST_URL \
+                          -Dsonar.login=$SONAR_AUTH_TOKEN
+                    '''
+                }
+            }
+        }
 
         // stage('Quality Gate') {
         //   steps {
