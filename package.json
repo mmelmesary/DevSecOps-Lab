@@ -1,0 +1,26 @@
+{
+    "name": "vulnerable-nodejs-app",
+    "version": "1.0.0",
+    "description": "A simple Node.js app with intentional vulnerabilities for DevSecOps demo",
+    "main": "app.js",
+    "scripts": {
+      "start": "node app.js",
+      "lint": "eslint ."
+    },
+    "keywords": [
+      "nodejs",
+      "devsecops",
+      "vulnerable",
+      "demo"
+    ],
+    "author": "DevSecOps Demo",
+    "license": "MIT",
+    "dependencies": {
+      "express": "4.17.1",
+      "mysql": "2.18.1", 
+      "body-parser": "1.19.0"
+    },
+    "devDependencies": {
+      "eslint": "^8.56.0"
+    }
+  }
