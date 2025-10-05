@@ -33,20 +33,20 @@ pipeline {
             }
         }
 
-        // stage('Quality Gate') {
-        //   steps {
-        //     timeout(time: 5, unit: 'MINUTES') {
-        //     script {
-        //             def qualityGate = waitForQualityGate()
-        //             if (qualityGate.status != 'OK') {
-        //                  echo "Quality Gate failed with status: ${qualityGate.status}. Skipping failure as per configuration."
-        //               } else {
-        //                  echo "Quality Gate passed."
-        //              }
-        //            }
-        //        }
-        //     }
-        // }
+        stage('Quality Gate') {
+          steps {
+            timeout(time: 5, unit: 'MINUTES') {
+            script {
+                    def qualityGate = waitForQualityGate()
+                    if (qualityGate.status != 'OK') {
+                         echo "Quality Gate failed with status: ${qualityGate.status}. Skipping failure as per configuration."
+                      } else {
+                         echo "Quality Gate passed."
+                     }
+                   }
+               }
+            }
+        }
         // stage('Secrets Check') {
         //    steps { 
         //        sh 'gitleaks detect --source . --report-format json --report-path gitleaks-report.json || true'
