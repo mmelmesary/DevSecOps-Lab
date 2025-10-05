@@ -47,18 +47,18 @@ pipeline {
                }
             }
         }
-        // stage('Secrets Check') {
-        //    steps { 
-        //        sh 'gitleaks detect --source . --report-format json --report-path gitleaks-report.json || true'
+        stage('Secrets Check') {
+           steps { 
+               sh 'gitleaks detect --source . --report-format json --report-path gitleaks-report.json || true'
                
-        //    }
-        // }
-        // stage('Archive Results') {
-        //     steps {
-        //          archiveArtifacts artifacts: 'gitleaks-report.json', fingerprint: true
+           }
+        }
+        stage('Archive Results') {
+            steps {
+                 archiveArtifacts artifacts: 'gitleaks-report.json', fingerprint: true
 
-        //     }
-        // }
+            }
+        }
 
 
         // stage('Audit') {

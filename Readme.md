@@ -36,7 +36,7 @@ docker run \
   --restart=on-failure \
   --detach \
   --network jenkins \
-  --env DOCKER_HOST=tcp://docker:2376 \  # this will connect to the docker host in the bind container
+  --env DOCKER_HOST=tcp://docker:2376 \  # this will connect to the docker host in the dind container
   --env DOCKER_CERT_PATH=/certs/client \
   --env DOCKER_TLS_VERIFY=1 \
   --publish 8080:8080 \
@@ -48,7 +48,53 @@ docker run \
 
 ___
 
-# Second: Configuration
+### Installing the SonarQube Scanner plugin. 
+
+> Jenkins extension version 2.11 or later is required.
+
+**Proceed as follows:**
+
+1. From the Jenkins Dashboard, navigate to Manage Jenkins > Manage Plugins and install the SonarQube Scanner plugin.
+
+2. Back at the Jenkins Dashboard, navigate to Credentials > System from the left navigation.
+
+3. Click the Global credentials (unrestricted) link in the System table.
+
+4. Click Add credentials in the left navigation and add the following information:
+
+  - Kind: Secret Text
+
+  - Scope: Global
+
+  - Secret: Generate a token at User > My Account > Security in SonarQube Server, and copy and paste it here.
+
+5. Click OK.
+
+6. From the Jenkins Dashboard, navigate to **Manage Jenkins** > **Configure System.**
+
+7. From the **SonarQube Servers** section, click Add SonarQube. Add the following information:
+
+  - Name: Give a unique name to your SonarQube Server instance.
+
+  - Server URL: Your SonarQube Server instance URL.
+
+  - Credentials: Select the credentials created during step 4.
+  > ![alt text](sonarqube-scanner-plagin.png)
+
+8. Click Save
+
+
+#### When you install and configure this plugin, it provides:
+
+`withSonarQubeEnv('YourServerName')`
+→ Sets environment variables (like the token, server URL, etc.) for your SonarQube scan.
+
+`waitForQualityGate()`
+→ Makes Jenkins wait for SonarQube to finish analyzing the project and returns the Quality Gate result.
+
+___
+
+### Configuring Sonarqube webhook 
 
 Automatic interruption of your pipeline in case the quality gate 
 
@@ -70,38 +116,5 @@ With the Jenkins extension, you can configure that your pipeline job fails in ca
 
 ![soanarqube-integartion](https://docs.sonarsource.com/~gitbook/image?url=https%3A%2F%2Fcontent.gitbook.com%2Fcontent%2F8MaL7qHHph0mwB0jcBjB%2Fblobs%2FT2wqUToHs5WyX9u1UkhK%2Fjenkins-integration.png&width=768&dpr=4&quality=100&sign=af561954&sv=2)
 
-### Installing the Jenkins extension
 
-> Jenkins extension version 2.11 or later is required.
-
-**Proceed as follows:**
-
-- From the Jenkins Dashboard, navigate to Manage Jenkins > Manage Plugins and install the SonarQube Scanner plugin.
-
-- Back at the Jenkins Dashboard, navigate to Credentials > System from the left navigation.
-
-- Click the Global credentials (unrestricted) link in the System table.
-
-- Click Add credentials in the left navigation and add the following information:
-
-  - Kind: Secret Text
-
-  - Scope: Global
-
-  - Secret: Generate a token at User > My Account > Security in SonarQube Server, and copy and paste it here.
-
-- Click OK.
-
-- From the Jenkins Dashboard, navigate to **Manage Jenkins** > **Configure System.**
-
-- From the **SonarQube Servers** section, click Add SonarQube. Add the following information:
-
-  - Name: Give a unique name to your SonarQube Server instance.
-
-  - Server URL: Your SonarQube Server instance URL.
-
-  - Credentials: Select the credentials created during step 4.
-
-- Click Save
-
-
+![alt text](sonarqube-webhook.png)
