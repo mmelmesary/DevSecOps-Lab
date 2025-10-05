@@ -1,0 +1,25 @@
+[Pipeline] sh
++ semgrep --config ./semgrep-rules/last-user-is-root --config p/docker --config p/nodejsscan --config p/javascript --config p/owasp-top-ten --config p/secrets --json --output semgrep-result.json .
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Archive Results)
+Stage "Archive Results" skipped due to earlier failure(s)
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Sonarqube)
+Stage "Sonarqube" skipped due to earlier failure(s)
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+ERROR: script returned exit code 7
+Finished: FAILURE

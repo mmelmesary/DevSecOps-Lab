@@ -9,7 +9,7 @@ pipeline {
 
         stage('SAST') {
             steps {
-                sh 'semgrep --config ./semgrep-rules/last-user-is-root --config p/docker --config p/nodejsscan --config p/javascript --config p/owasp-top-ten --config p/secrets --json --output semgrep-result.json .'
+                sh 'semgrep --config ./semgrep-rules/last-user-is-root.yml --config p/docker --config p/nodejsscan --config p/javascript --config p/owasp-top-ten --config p/secrets --json --output semgrep-result.json .'
             }
         }
 
