@@ -9,7 +9,7 @@ pipeline {
 
         stage('SAST') {
             steps {
-                sh 'semgrep --config p/nodejsscan --config p/javascript --config p/owasp-top-ten --config p/secrets --json --output semgrep-result.json .'
+                sh 'semgrep --config ./semgrep-rules/last-user-is-root --config p/docker --config p/nodejsscan --config p/javascript --config p/owasp-top-ten --config p/secrets --json --output semgrep-result.json .'
             }
         }
 
@@ -26,11 +26,6 @@ pipeline {
                 withSonarQubeEnv("${env.SONARQUBE}") {
                     sh '''
                         sonar-scanner \
-                          -Dsonar.projectKey=devsecops \
-                          -Dsonar.projectName="DevSecOps" \
-                          -Dsonar.projectVersion=1.0 \
-                          -Dsonar.sources=. \
-                          -Dsonar.exclusions="**/node_modules/**,**/venv/**" \
                           -Dsonar.host.url="$SONAR_HOST_URL" \
                           -Dsonar.login="$SONAR_AUTH_TOKEN"
                     '''
