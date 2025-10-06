@@ -13,7 +13,7 @@ pipeline {
             }
         }
 
-        stage('Archive Results') {
+        stage('SAST Archive Results') {
             steps {
                  archiveArtifacts artifacts: 'semgrep-result.json', fingerprint: true
 
@@ -53,7 +53,7 @@ pipeline {
                
            }
         }
-        stage('Archive Results') {
+        stage('Gitleaks Archive Results') {
             steps {
                  archiveArtifacts artifacts: 'gitleaks-report.json', fingerprint: true
 
@@ -67,7 +67,7 @@ pipeline {
             }
         }
 
-        stage('Archive Results') {
+        stage('SCA Archive Results') {
             steps {
                  archiveArtifacts artifacts: 'audit-result.txt', fingerprint: true
 
