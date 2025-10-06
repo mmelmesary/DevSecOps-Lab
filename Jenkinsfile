@@ -61,17 +61,17 @@ pipeline {
         }
 
 
-        // stage('Audit') {
-        //     steps {
-        //         sh 'npm audit --audit-level=high > audit-result.txt || true'
-        //     }
-        // }
+        stage('Audit') {
+            steps {
+                sh 'npm audit --audit-level=high > audit-result.txt || true'
+            }
+        }
 
-        // stage('Archive Results') {
-        //     steps {
-        //          archiveArtifacts artifacts: 'audit-result.txt', fingerprint: true
+        stage('Archive Results') {
+            steps {
+                 archiveArtifacts artifacts: 'audit-result.txt', fingerprint: true
 
-        //     }
-        // }
+            }
+        }
     }
 }
