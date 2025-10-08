@@ -1,0 +1,51 @@
+[extend]
+useDefault = true
+
+# === Database Passwords ===
+[[rules]]
+id = "db-password"
+description = "Database Password Detected"
+regex = '''(?i)(db_pass(word)?|database_password|db_pwd|db_secret)\s*=\s*["'][^"']+["']'''
+tags = ["database", "password", "secret"]
+
+# === MySQL Connection Strings ===
+[[rules]]
+id = "mysql-connection"
+description = "MySQL Connection String"
+regex = '''mysql:\/\/[^:\s]+:[^@\s]+@[^:\s]+(:\d+)?\/[^\s'"]+'''
+tags = ["database", "mysql", "connection-string"]
+
+# === PostgreSQL Connection Strings ===
+[[rules]]
+id = "postgres-connection"
+description = "PostgreSQL Connection String"
+regex = '''postgres(?:ql)?:\/\/[^:\s]+:[^@\s]+@[^:\s]+(:\d+)?\/[^\s'"]+'''
+tags = ["database", "postgres", "connection-string"]
+
+# === MongoDB Connection Strings ===
+[[rules]]
+id = "mongodb-connection"
+description = "MongoDB Connection String"
+regex = '''mongodb(?:\+srv)?:\/\/[^:\s]+:[^@\s]+@[^:\s]+\/[^\s'"]+'''
+tags = ["database", "mongodb", "connection-string"]
+
+# === Generic JDBC URLs with Credentials ===
+[[rules]]
+id = "jdbc-connection"
+description = "JDBC Connection String with Credentials"
+regex = '''jdbc:[a-z]+:\/\/[^:\s]+:[^@\s]+@[^:\s]+(:\d+)?\/[^\s'"]+'''
+tags = ["database", "jdbc", "connection-string"]
+
+# === Rule 1: password: '...' ===
+[[rules]]
+id = "yaml-password"
+description = "Hardcoded Password in YAML/JSON format"
+regex = '''(?i)password\s*:\s*['"][^'"]+['"]'''
+tags = ["password", "yaml", "config"]
+
+# === Rule 2: SECRET_KEY=... ===
+[[rules]]
+id = "env-secret-key"
+description = "Hardcoded SECRET_KEY in env or config files"
+regex = '''(?i)SECRET_KEY\s*=\s*["']?[^"'\s]+["']?'''
+tags = ["secret", "key", "env"]

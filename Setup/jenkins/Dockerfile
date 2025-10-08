@@ -41,7 +41,7 @@ RUN curl -sSL -o /usr/local/bin/hadolint \
       https://github.com/hadolint/hadolint/releases/latest/download/hadolint-Linux-x86_64 \
     && chmod +x /usr/local/bin/hadolint
 
-
+# Install conftest
 RUN curl -sSL -o conftest.tar.gz https://github.com/open-policy-agent/conftest/releases/download/v0.24.0/conftest_0.24.0_Linux_x86_64.tar.gz && \ 
     tar xvf conftest.tar.gz && \
     mv conftest /usr/local/bin/ && \

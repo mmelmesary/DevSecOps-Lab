@@ -73,5 +73,23 @@ pipeline {
 
             }
         }
+
+        stage('Validate Dockerfile') {
+            steps {
+                script{
+                    sh 'hadolint Dockerfile || true'
+                    // sh 'conftest test Dockerfile || true'
+                   
+                }    
+            }
+        }
+        stage('Build') {
+            steps {
+                script{
+                    sh 'docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .'
+                }    
+            }
+        }
+
     }
 }
