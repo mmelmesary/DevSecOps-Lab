@@ -3,6 +3,9 @@ pipeline {
 
     environment {
         SONARQUBE = 'sonarqube'
+        DOCKER_IMAGE = 'quay.io/melmesary/devsecops-demo'
+        DOCKER_TAG = 'latest'
+
     }
 
     stages {
